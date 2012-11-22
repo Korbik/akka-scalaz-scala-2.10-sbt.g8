@@ -12,11 +12,14 @@ object $name;format="Camel"$Build extends Build {
       version := "$version$",
       scalaVersion := "$scala_version$",
       resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases",
+      resolvers += "Typesafe Snapshots" at "http://repo.typesafe.com/typesafe/snapshots",
       libraryDependencies ++= Seq(
-       "com.typesafe.akka" % "akka-actor_2.10.0-RC2" % "2.1.0-RC2",
-       "org.specs2" % "specs2_2.10.0-RC2" % "1.12.2",
-       "org.scalaz" % "scalaz-core_2.10.0-RC2" % "7.0-M4"
-     )
+       "com.typesafe.akka" % "akka-actor" % "2.1.0-RC2" cross CrossVersion.full,
+       "org.specs2" % "specs2" % "1.12.2" cross CrossVersion.full,
+       "org.scalaz" % "scalaz-core" % "7.0.0-M4" cross CrossVersion.full
+     ),
+     scalacOptions += "-feature",
+     initialCommands in console := "import scalaz._, Scalaz._"
     )
   )
 }
